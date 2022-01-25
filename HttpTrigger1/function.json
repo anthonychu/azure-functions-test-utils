@@ -14,6 +14,13 @@
       "type": "http",
       "direction": "out",
       "name": "res"
+    },
+    {
+      "type": "queue",
+      "direction": "out",
+      "name": "outputQueueItem",
+      "queueName": "test-queue",
+      "connection": "AzureWebJobsStorage"
     }
   ],
   "scriptFile": "../dist/HttpTrigger1/index.js"

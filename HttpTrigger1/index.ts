@@ -9,9 +9,15 @@ const httpTrigger: AzureFunction = async function (context: Context, req: HttpRe
 
     context.res = {
         // status: 200, /* Defaults to 200 */
-        body: responseMessage
+        body: responseMessage,
     };
 
+    if (name) {
+        context.bindings.outputQueueItem = {
+            "name": name,
+        };
+        // throw "ERRORRRR";
+    }
 };
 
 export default httpTrigger;
