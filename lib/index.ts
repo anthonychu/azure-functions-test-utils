@@ -12,7 +12,7 @@ export class TestContext implements Context {
         functionDirectory: "",
     };
     bindings: ContextBindings = {};
-    bindingData: ContextBindingData = {};
+    bindingData: ContextBindingData= = {};
     traceContext: TraceContext = {
         attributes: {},
         traceparent: null,
@@ -176,4 +176,13 @@ function isRunning(pid?: number) {
     } catch (e: any) {
         return e.code === 'EPERM';
     }
+}
+
+export interface TestAzureQueueMetadata {
+    expirationTime?: string;
+    insertionTime?: string;
+    popReceipt?: string;
+    nextVisibleTime?: string;
+    dequeueCount?: number;
+    id?: string;
 }

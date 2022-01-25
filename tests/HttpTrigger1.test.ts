@@ -6,14 +6,14 @@ describe("HttpTrigger1 unit tests", () => {
     it("should prompt for a username", async () => {
         const context = new TestContext();
         await HttpTrigger1(context, context.req);
-        expect(context.res?.body).toEqual("This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.");
+        expect(context.res.body).toEqual("This HTTP triggered function executed successfully. Pass a name in the query string or in the request body for a personalized response.");
     });
 
     it("should echo back the username in query string", async () => {
         const context = new TestContext();
         context.req.query = { name: "test" };
         await HttpTrigger1(context, context.req);
-        expect(context.res?.body).toEqual("Hello, test. This HTTP triggered function executed successfully.");
+        expect(context.res.body).toEqual("Hello, test. This HTTP triggered function executed successfully.");
     });
 
     it("should output the username in query string to queue", async () => {
