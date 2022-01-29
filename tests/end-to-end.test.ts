@@ -40,22 +40,22 @@ describe("end-to-end tests", () => {
     });
 
     it("name in query string", async () => {
-        const queueTrigger1Invocation = funcCli.waitForInvocations("QueueTrigger1", 1);
+        const queueTrigger1Invocation = funcCli.waitForInvocation("QueueTrigger1");
         const result = await funcCli.fetch("/api/HttpTrigger1?name=test");
         expect(await result.text()).toEqual("Hello, test. This HTTP triggered function executed successfully.");
-        const queueTrigger1Statuses = await queueTrigger1Invocation;
-        expect(queueTrigger1Statuses).toEqual([ "Succeeded" ]);
+        const queueTrigger1Result = await queueTrigger1Invocation;
+        expect(queueTrigger1Result.status).toEqual("Succeeded");
     });
 
     it("name in body", async () => {
-        const queueTrigger1Invocation = funcCli.waitForInvocations("QueueTrigger1", 1);
+        const queueTrigger1Invocation = funcCli.waitForInvocation("QueueTrigger1");
         const result = await funcCli.fetch("/api/HttpTrigger1", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name: "test" })
         });
         expect(await result.text()).toEqual("Hello, test. This HTTP triggered function executed successfully.");
-        const queueTrigger1Statuses = await queueTrigger1Invocation;
-        expect(queueTrigger1Statuses).toEqual([ "Succeeded" ]);
+        const queueTrigger1Result = await queueTrigger1Invocation;
+        expect(queueTrigger1Result.status).toEqual("Succeeded");
     });
 });

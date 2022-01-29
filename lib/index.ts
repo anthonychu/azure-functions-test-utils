@@ -79,10 +79,10 @@ export class FuncCli {
                     for (const waiter of this._invocationWaiters) {
                         if (waiter.functionName === invocation.functionName) {
                             waiter.times--;
-                            waiter.statuses.push(invocation.status);
+                            waiter.results.push({ status: invocation.status });
                             if (waiter.times === 0) {
                                 completedWaiters.push(waiter);
-                                waiter.resolve(waiter.statuses);
+                                waiter.resolve(waiter.results);
                             }
                         }
                     }
@@ -107,25 +107,34 @@ export class FuncCli {
         return fetch(url, init);
     }
 
-    waitForInvocations(functionName: string, times: number = 1): Promise<string[]> {
+    waitForInvocations(functionName: string, times: number = 1): Promise<InvocationResult[]> {
         return new Promise((resolve, reject) => {
             this._invocationWaiters.push({
                 functionName,
                 times,
                 resolve,
                 reject,
-                statuses: [],
+                results: [],
             });
         });
+    }
+
+    async waitForInvocation(functionName: string): Promise<InvocationResult> {
+        const results = await this.waitForInvocations(functionName, 1);
+        return results[0];
     }
 }
 
 interface InvocationWaiter {
     functionName: string,
     times: number,
-    resolve: (value: string[] | PromiseLike<string[]>) => void,
+    resolve: (value: InvocationResult[] | PromiseLike<InvocationResult[]>) => void,
     reject: (reason?: any) => void,
-    statuses: string[],
+    results: InvocationResult[],
+}
+
+interface InvocationResult {
+    status: string;
 }
 
 async function spawnAndWait(command: string, args: string[], waitPort: number, opts?: any) {
