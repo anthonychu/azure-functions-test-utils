@@ -3,6 +3,7 @@ import { ChildProcess } from "child_process";
 import spawn = require("cross-spawn");
 import waitOn = require('wait-on');
 import fetch from "node-fetch";
+import * as NodeFetch from 'node-fetch';
 
 export class TestContext implements Context {
     invocationId: string = "";;
@@ -12,7 +13,7 @@ export class TestContext implements Context {
         functionDirectory: "",
     };
     bindings: ContextBindings = {};
-    bindingData: ContextBindingData= = {};
+    bindingData: ContextBindingData = {};
     traceContext: TraceContext = {
         attributes: {},
         traceparent: null,
@@ -99,23 +100,12 @@ export class FuncCli {
         this._funcProcess = undefined;
     }
 
-    // fetch(input: any, init?: any): Promise<Response> {
-    //     const setBaseUrl = (url: string) => {
-    //         if (/^https?\:\/\//.test(url)) {
-    //             return url;
-    //         } else {
-    //             url.replace(/^\/+/, "");
-    //             return `${this.baseUrl}${url}`;
-    //         }
-    //     };
-
-    //     let url: string = "";
-    //     if (typeof input === "string") {
-    //         input = setBaseUrl(input);
-    //     }
-
-    //     return fetch(...arguments);
-    // }
+    fetch(url: string, init?: NodeFetch.RequestInit): Promise<NodeFetch.Response> {
+        if (!/^https?\:\/\//.test(url)) {
+            url = `${this.baseUrl}/${url.replace(/^\/+/, "")}`;
+        }
+        return fetch(url, init);
+    }
 
     waitForInvocations(functionName: string, times: number = 1): Promise<string[]> {
         return new Promise((resolve, reject) => {
