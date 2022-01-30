@@ -59,16 +59,18 @@ export class FuncCli {
         return `http://localhost:${this._opts.port}`;
     }
 
-    async start(opts: { port?: number, cwd?: string }): Promise<void> {
-        const port = opts.port || 7071;
-        const cwd = opts.cwd || process.cwd();
+    async start(opts: { port?: number, cwd?: string, env?: {[key: string]: string} }): Promise<void> {
+        const port = opts.port ?? 7071;
+        const cwd = opts.cwd ?? process.cwd();
+        const env = Object.assign({}, process.env, opts.env ?? {});
         this._opts = { port, cwd };
-        this._funcProcess = await spawnAndWait('func', ['start'], port, { cwd });
+
+        this._funcProcess = await spawnAndWait('func', ['start', '--verbose'], port, { cwd, env });
         this._funcProcess.stdout.on('data', (data?: Buffer) => {
             const dataText = data?.toString("utf8") ?? "";
             const lines = dataText.split(/\r?\n/);
             for (const line of lines) {
-                const match = /\bExecuted 'Functions\.(.+?)' \((\w+),/.exec(line);
+                const match = /\bExecuted 'Functions\.(.+?)' \((\w+),.+\)/.exec(line);
                 if (match) {
                     const invocation = {
                         functionName: match[1],

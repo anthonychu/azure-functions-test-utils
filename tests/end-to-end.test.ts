@@ -6,12 +6,19 @@ jest.setTimeout(30000);
 describe("end-to-end tests", () => {
     let funcCli: FuncCli;
     let queueClient: QueueClient;
+
     beforeAll(async () => {
-        queueClient = new QueueClient("UseDevelopmentStorage=true", "test-queue");
+        const storageConnectionString = "UseDevelopmentStorage=true";
+        queueClient = new QueueClient(storageConnectionString, "test-queue");
         await queueClient.createIfNotExists();
 
+        const funcEnv = {
+            "AzureWebJobsStorage": storageConnectionString,
+            "FUNCTIONS_WORKER_RUNTIME": "node",
+        };
+
         funcCli = new FuncCli();
-        await funcCli.start({ port: 7071, cwd: process.cwd() });
+        await funcCli.start({ port: 7071, cwd: process.cwd(), env: funcEnv });
     });
 
     beforeEach(async () => {

@@ -11,18 +11,6 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@azure/functions": "^1.2.3",
-    "@azure/storage-queue": "^12.7.0",
-    "@types/cross-spawn": "^6.0.2",
-    "@types/jest": "^27.4.0",
-    "@types/node": "^17.0.12",
-    "@types/wait-on": "^5.3.1",
-    "cross-spawn": "^7.0.3",
-    "jest": "^27.4.7",
-    "node-fetch": "^2.6.7",
-    "tree-kill": "^1.2.2",
-    "ts-jest": "^27.1.3",
-    "typescript": "^4.0.0",
-    "wait-on": "^6.0.0"
+    "@anthonychu/azure-functions-test-utils": "file:lib"
   }
 }
