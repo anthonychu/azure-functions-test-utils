@@ -9,7 +9,9 @@
     "start": "func start",
     "test": "npm run prestart && jest --runInBand --verbose"
   },
-  "dependencies": {},
+  "dependencies": {
+    "durable-functions": "^1.5.4"
+  },
   "devDependencies": {
     "@anthonychu/azure-functions-test-utils": "file:lib"
   }
