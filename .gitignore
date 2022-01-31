@@ -100,3 +100,6 @@ __azurite_db*__.json
 
 *.js
 *.js.map
+
+lib/README.md
+lib/LICENSE

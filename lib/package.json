@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc"
+    "build": "cp ../README.md . && cp ../LICENSE . && tsc"
   },
   "dependencies": {
     "@azure/functions": "^1.2.3",
