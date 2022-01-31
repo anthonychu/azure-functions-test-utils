@@ -75,6 +75,9 @@ Some members available on `FuncCli` are:
 #### Prerequisites
 
 * Install Azure Functions Core Tools.
+
+    `npm install -g azure-functions-core-tools@4`
+
     - Ensure you install the version required by your app.
     - Ensure you install it globally.
 
