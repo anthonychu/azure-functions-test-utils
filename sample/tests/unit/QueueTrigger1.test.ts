@@ -1,4 +1,4 @@
-import QueueTrigger1 from "../../QueueTrigger1/index"
+import func from "../../QueueTrigger1/index"
 import { TestAzureQueueMetadata, TestContext } from "@anthonychu/azure-functions-test-utils";
 
 describe("QueueTrigger1 unit tests", () => {
@@ -10,7 +10,10 @@ describe("QueueTrigger1 unit tests", () => {
         };
         context.bindingData = queueMetadata;
         const spy = jest.spyOn(context, "log");
-        await QueueTrigger1(context, { name: "test" });
+
+        await func(context, { name: "test" });
+        
         expect(spy).toHaveBeenCalledTimes(1);
     });
+
 });

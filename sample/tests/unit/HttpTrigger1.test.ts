@@ -52,7 +52,8 @@ describe("HttpTrigger1 unit tests", () => {
         const spy = jest.spyOn(context, "log");
 
         await func(context, context.req);
-        
+
         expect(spy).toHaveBeenCalledTimes(1);
     });
+    
 });

@@ -1,5 +1,5 @@
 import { DummyOrchestrationContext } from "durable-functions";
-import HelloOrchestrator from "../../HelloOrchestrator/index"
+import func from "../../HelloOrchestrator/index"
 
 describe("HelloOrchestrator unit tests", () => {
 
@@ -12,8 +12,9 @@ describe("HelloOrchestrator unit tests", () => {
             .mockReturnValueOnce("Hello London!");
         context.df.callActivity = callActivityMock;
 
-        HelloOrchestrator(context);
+        func(context);
 
         expect(context.doneValue?.output).toEqual(["Hello Tokyo!", "Hello Seattle!", "Hello London!"]);
     });
+    
 });
