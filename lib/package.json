@@ -20,6 +20,10 @@
     "wait-on": "^6.0.0"
   },
   "keywords": [],
-  "author": "",
-  "license": "MIT"
+  "author": "Anthony Chu <antchu@microsoft.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/anthonychu/azure-functions-test-utils.git"
+  }
 }
