@@ -1,5 +1,5 @@
-import HttpTrigger1 from "../HttpTrigger1/index"
-import { TestContext } from "../lib/index";
+import HttpTrigger1 from "../../HttpTrigger1/index"
+import { TestContext } from "@anthonychu/azure-functions-test-utils";
 
 describe("HttpTrigger1 unit tests", () => {
 

@@ -12,8 +12,8 @@ jest.mock("durable-functions", () => {
     return mockDF;
 });
 
-import HelloHttpStart from "../HelloHttpStart/index"
-import { TestContext } from "../lib/index";
+import HelloHttpStart from "../../HelloHttpStart/index"
+import { TestContext } from "@anthonychu/azure-functions-test-utils";
 
 describe("HelloHttpStart unit tests", () => {
     it("should use client to start an orchestration", async () => {

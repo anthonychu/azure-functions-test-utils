@@ -1,4 +1,4 @@
-import { FuncCli } from "../lib/index";
+import { FuncCli } from "@anthonychu/azure-functions-test-utils";
 import { QueueClient } from "@azure/storage-queue";
 
 jest.setTimeout(30000);

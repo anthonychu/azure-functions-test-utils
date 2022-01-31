@@ -1,5 +1,5 @@
-import QueueTrigger1 from "../QueueTrigger1/index"
-import { TestAzureQueueMetadata, TestContext } from "../lib/index";
+import QueueTrigger1 from "../../QueueTrigger1/index"
+import { TestAzureQueueMetadata, TestContext } from "@anthonychu/azure-functions-test-utils";
 
 describe("QueueTrigger1 unit tests", () => {
 

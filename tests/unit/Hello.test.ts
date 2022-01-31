@@ -1,5 +1,5 @@
-import Hello from "../Hello/index"
-import { TestContext } from "../lib";
+import Hello from "../../Hello/index"
+import { TestContext } from "@anthonychu/azure-functions-test-utils";
 
 describe("Hello activity function unit tests", () => {
     it("should return a greeting", async () => {

@@ -1,5 +1,5 @@
 import { DummyOrchestrationContext } from "durable-functions";
-import HelloOrchestrator from "../HelloOrchestrator/index"
+import HelloOrchestrator from "../../HelloOrchestrator/index"
 
 describe("HelloOrchestrator unit tests", () => {
 
