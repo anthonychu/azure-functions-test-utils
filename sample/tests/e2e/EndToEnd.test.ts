@@ -21,27 +21,27 @@ describe("End-to-end tests", () => {
         await funcCli.start({ port: 7071, cwd: process.cwd(), env: funcEnv });
     });
 
-    beforeEach(async () => {
-        // clear messages from queue and wait for operation to complete
-        await queueClient.clearMessages();
-        let messageCount: number = 0;
-        while (true) {
-            const props = await queueClient.getProperties();
-            messageCount = props.approximateMessagesCount ?? 0;
-
-            if (messageCount) {
-                await new Promise(resolve => setTimeout(resolve, 1000));
-            } else {
-                break;
-            }
-        };
-    });
-
     afterAll(async () => {
         await funcCli.stop();
     });
 
     describe("HTTP trigger to queue trigger", () => {
+
+        beforeEach(async () => {
+            // clear messages from queue and wait for operation to complete
+            await queueClient.clearMessages();
+            let messageCount: number = 0;
+            while (true) {
+                const props = await queueClient.getProperties();
+                messageCount = props.approximateMessagesCount ?? 0;
+    
+                if (messageCount) {
+                    await new Promise(resolve => setTimeout(resolve, 1000));
+                } else {
+                    break;
+                }
+            };
+        });
 
         it("no name provided", async () => {
             const result = await funcCli.fetch("/api/HttpTrigger1");
