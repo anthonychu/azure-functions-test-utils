@@ -63,9 +63,14 @@ export class FuncCli {
         const port = opts.port ?? 7071;
         const cwd = opts.cwd ?? process.cwd();
         const env = Object.assign({}, process.env, opts.env ?? {});
+        const args = ['start', '--verbose']
         this._opts = { port, cwd };
 
-        this._funcProcess = await spawnAndWait('func', ['start', '--verbose'], port, { cwd, env });
+        if (port) {
+            args.push('--port', port.toString())
+        }
+
+        this._funcProcess = await spawnAndWait('func', args, port, { cwd, env });
         this._funcProcess.stdout.on('data', (data?: Buffer) => {
             const dataText = data?.toString("utf8") ?? "";
             const lines = dataText.split(/\r?\n/);
